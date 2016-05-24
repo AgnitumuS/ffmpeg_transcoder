@@ -1,9 +1,9 @@
-FLAGS := -O3 -Wall
+˘FLAGS := -O3 -Wall
 
 .PHONY : clean
 
-transcoder: transcoder.o list.o patch_memory.o patch_queue.o
-	gcc $(FLAGS) patch_queue.o patch_memory.o list.o  transcoder.o  -o transcoder -L /usr/local/lib \
+transcoder: transcoder.o list.o patch_memory.o
+	gcc $(FLAGS) patch_memory.o list.o  transcoder.o  -o transcoder -L /usr/local/lib \
 	-lavdevice -lavformat -lavfilter -lavcodec -lswresample -lswscale \
 	-lavutil -lm -lpthread
 
@@ -28,4 +28,4 @@ test_queue: test_queue.c patch_queue.o
 		-lpthread
 
 clean:
-	rm -rf *.o transcoder && rm -r [0-9]0[0-9].mp4_146*
+	rm -rf *.o transcoder 

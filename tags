@@ -17,7 +17,6 @@ CHECKING_FREQ	transcoder.c	/^int CHECKING_FREQ = 3;$/;"	v
 CHECKING_FREQ_OF_DEC_THREAD	transcoder.c	/^int CHECKING_FREQ_OF_DEC_THREAD = 3;$/;"	v
 CODEC_TIME_BASE	transcoder.c	/^AVRational CODEC_TIME_BASE;$/;"	v
 CONSOL_OUTPUT	transcoder.c	/^static int CONSOL_OUTPUT = 1;$/;"	v	file:
-COUNT_FULL_GOP_BUFFER_REF_GOP	transcoder.c	/^sem_t COUNT_FULL_GOP_BUFFER_REF_GOP;$/;"	v
 DECODED_FRAMES	transcoder.c	/^static int DECODED_FRAMES = 0;$/;"	v	file:
 DECODE_STEP	transcoder.c	/^static int DECODE_STEP = 300;$/;"	v	file:
 DEC_THREAD_CNT	transcoder.c	/^static int DEC_THREAD_CNT  = 0;$/;"	v	file:
@@ -34,10 +33,8 @@ FILE_LOG	debug.h	4;"	d
 FLAGS	Makefile	/^FLAGS := -O3 -Wall$/;"	m
 FPS_COUNT	transcoder.c	/^static int FPS_COUNT = 0;$/;"	v	file:
 FPS_MEASURE_DURATION	transcoder.c	/^static const int FPS_MEASURE_DURATION = 1;$/;"	v	file:
-FULL_GOP_BUFFER	transcoder.c	/^List **FULL_GOP_BUFFER = NULL;    \/\/ contains processed gops where each gop contains GOP_SIZE elems$/;"	v
-FULL_GOP_BUFFER_MUTEX	transcoder.c	/^sem_t *FULL_GOP_BUFFER_MUTEX;$/;"	v
+FULL_GOP_BUFFER	transcoder.c	/^queue **FULL_GOP_BUFFER = NULL;    \/\/ contains processed gops where each gop contains GOP_SIZE elems$/;"	v
 FULL_GOP_BUFFER_SIZE	transcoder.c	/^static int FULL_GOP_BUFFER_SIZE = 80;$/;"	v	file:
-FULL_GOP_NUM	transcoder.c	/^sem_t *FULL_GOP_NUM;$/;"	v
 GET_BLK_ADDR	patch_memory.h	10;"	d
 GOP_BUFFER	transcoder.c	/^List *GOP_BUFFER = NULL;  \/\/ contains the decoded and scaled gop frames$/;"	v
 GOP_BUFFER_MUTEX	transcoder.c	/^sem_t GOP_BUFFER_MUTEX;$/;"	v

@@ -397,10 +397,14 @@ int flush_encoder(AVFormatContext *fmt_ctx,unsigned int stream_index){
 List *GOP_BUFFER = NULL;  // contains the decoded and scaled gop frames
 sem_t GOP_BUFFER_MUTEX;
 
-List **FULL_GOP_BUFFER = NULL;    // contains processed gops where each gop contains GOP_SIZE elems
-sem_t *FULL_GOP_BUFFER_MUTEX;
-sem_t *FULL_GOP_NUM;
-sem_t COUNT_FULL_GOP_BUFFER_REF_GOP;
+#include "patch_queue.h"
+
+#define FULL_GOP_BUFFER_INITIAL_SIZE 50
+
+queue **FULL_GOP_BUFFER = NULL;    // contains processed gops where each gop contains GOP_SIZE elems
+//sem_t *FULL_GOP_BUFFER_MUTEX;     // lock each FULL_GOP_BUFFER access
+//sem_t *FULL_GOP_NUM;              // count number of gop in each list of FULL_GOP_BUFFER
+//sem_t COUNT_FULL_GOP_BUFFER_REF_GOP;  // guess: the free blocks in FULL_GOP_BUFFER
 
 typedef struct Gop {
 	int gop_id;
@@ -438,7 +442,6 @@ void free_Gop(Gop *g) {
 	if (g->encoded_cnt == OUTPUT_VIDEO_NUM) {
 		ss_free(&gop_buffer_memory, g->buf);
 		ss_free(&gop_structure_memory, g);
-		sem_post(&COUNT_FULL_GOP_BUFFER_REF_GOP);
 	}
 	sem_post(&g->gop_mutex);
 	return;
@@ -513,13 +516,13 @@ int count_gop_in_full_gop_buffer() {
 	int count = 0;
 	int i;
 	for (i = 0; i < OUTPUT_VIDEO_NUM; i++) {
-		List * buffer = FULL_GOP_BUFFER[i];
-		ListNode *node = buffer->start;
-		while (node != buffer->end) {
+		queue *buffer = FULL_GOP_BUFFER[i];
+		Gop *node = get_first_elem(buffer);
+		while (node) {
 			int is_contain = false;
 			int j;
 			for (j = i + 1; j < OUTPUT_VIDEO_NUM; j++) {
-				if (is_contain_List(node->elem, FULL_GOP_BUFFER[j])) {
+				if (contained_in_queue(buffer, node)) {
 					is_contain = true;
 					break;
 				}
@@ -527,6 +530,7 @@ int count_gop_in_full_gop_buffer() {
 			if (!is_contain) {
 				count++;
 			}
+      node = next_element(buffer, node);
 		}
 	}
 	return count;
@@ -536,19 +540,11 @@ void print_gop_id_of_full_gop_buffer() {
 	printf("Gop ids:");
 	int i;
 	for (i = 0; i < OUTPUT_VIDEO_NUM; i++) {
-		List * buffer = FULL_GOP_BUFFER[i];
-		ListNode *node = buffer->start;
-		while (true) {
-			if (node == NULL) {
-				break;
-			} else {
-				printf(" %d", ((Gop *)node->elem)->gop_id);
-				if (node == buffer->end) {
-					break;
-				} else {
-					node = node->next;
-				}
-			}
+		queue *buffer = FULL_GOP_BUFFER[i];
+		Gop *node = get_first_elem(buffer);
+		while (node) {
+			printf(" %d", node->gop_id);
+      node = next_element(buffer, node);
 		}
 		printf("\t");
 	}
@@ -556,11 +552,12 @@ void print_gop_id_of_full_gop_buffer() {
 }
 
 static void inline add_gop_to_full_gop_buffer(Gop *g, int full_gop_buffer_id) {
-	ListNode * node = new_ListNode(g);
-	sem_wait(&FULL_GOP_BUFFER_MUTEX[full_gop_buffer_id]);
-	insert_List(node, FULL_GOP_BUFFER[full_gop_buffer_id]);
-	sem_post(&FULL_GOP_BUFFER_MUTEX[full_gop_buffer_id]);
-	sem_post(&FULL_GOP_NUM[full_gop_buffer_id]);
+//	ListNode * node = new_ListNode(g);
+//	sem_wait(&FULL_GOP_BUFFER_MUTEX[full_gop_buffer_id]);
+//	insert_List(node, FULL_GOP_BUFFER[full_gop_buffer_id]);
+//	sem_post(&FULL_GOP_BUFFER_MUTEX[full_gop_buffer_id]);
+//	sem_post(&FULL_GOP_NUM[full_gop_buffer_id]);
+  enqueue(FULL_GOP_BUFFER[full_gop_buffer_id], &g);
 	return;
 }
 
@@ -601,13 +598,14 @@ void add_gop_to_full_gop_buffers(Gop *g) {
 // EFFECT: remove the first gop from FULL_GOP_BUFFER
 Gop *remove_gop_from_full_gop_buffer(int full_gop_buffer_id) {
   // count GOP_BUFFER
-	sem_wait(&FULL_GOP_NUM[full_gop_buffer_id]);
-	sem_wait(&FULL_GOP_BUFFER_MUTEX[full_gop_buffer_id]);
-	ListNode * node = remove_List(FULL_GOP_BUFFER[full_gop_buffer_id]);
-	sem_post(&FULL_GOP_BUFFER_MUTEX[full_gop_buffer_id]);
-	Gop *g = (Gop *)node->elem;
-	free(node);
-	return g;
+//	sem_wait(&FULL_GOP_NUM[full_gop_buffer_id]);
+//	sem_wait(&FULL_GOP_BUFFER_MUTEX[full_gop_buffer_id]);
+//	ListNode * node = remove_List(FULL_GOP_BUFFER[full_gop_buffer_id]);
+//	sem_post(&FULL_GOP_BUFFER_MUTEX[full_gop_buffer_id]);
+//	Gop *g = (Gop *)node->elem;
+//	free(node);
+  Gop **elem = (Gop **)dequeue(FULL_GOP_BUFFER[full_gop_buffer_id]);
+	return *elem;
 }
 
 // GIVEN: the picture number of a decoded and scaled frame and the frame
@@ -638,7 +636,7 @@ void add_scaled_frame_to_gop_buffer(int pict_num, uint8_t **buf) {
 	if (g->frame_cnt == GOP_SIZE) {
 		remove_gop_from_gop_buffer(g);
 
-		sem_wait(&COUNT_FULL_GOP_BUFFER_REF_GOP);
+//		sem_wait(&COUNT_FULL_GOP_BUFFER_REF_GOP);
 		add_gop_to_full_gop_buffers(g);
 	}
 	sem_post(&g->gop_mutex);
@@ -720,20 +718,17 @@ int initialize_decode_data() {
 	GOP_BUFFER = new_List();
 	sem_init(&GOP_BUFFER_MUTEX, 0, 1);
 
-	FULL_GOP_BUFFER = xmalloc(sizeof(List *) * OUTPUT_VIDEO_NUM);
-	FULL_GOP_BUFFER_MUTEX = xmalloc(sizeof(sem_t) * OUTPUT_VIDEO_NUM);
-	FULL_GOP_NUM = xmalloc(sizeof(sem_t) * OUTPUT_VIDEO_NUM);
+	FULL_GOP_BUFFER = (queue **)xmalloc(sizeof(queue *) * OUTPUT_VIDEO_NUM);
+//	FULL_GOP_BUFFER_MUTEX = xmalloc(sizeof(sem_t) * OUTPUT_VIDEO_NUM);
+//	FULL_GOP_NUM = xmalloc(sizeof(sem_t) * OUTPUT_VIDEO_NUM);
 
 	sem_init(&VIDEO_FRAME_COUNT_MUTEX, 0 , 1);
 
 	int i;
 	for (i = 0; i < OUTPUT_VIDEO_NUM; i++) {
-		FULL_GOP_BUFFER[i] = new_List();
-		sem_init(&FULL_GOP_BUFFER_MUTEX[i], 0, 1);
-		sem_init(&FULL_GOP_NUM[i], 0, 0);
+    FULL_GOP_BUFFER[i] = (queue *)malloc(sizeof(queue));
+    initialize_queue(FULL_GOP_BUFFER[i], FULL_GOP_BUFFER_INITIAL_SIZE, sizeof(void *));
 	}
-
-	sem_init(&COUNT_FULL_GOP_BUFFER_REF_GOP, 0, FULL_GOP_BUFFER_SIZE);
 
 //	core_binding_initialize();
 
@@ -1500,8 +1495,8 @@ void output_one_video(EncodeStruct *es) {
 
 // RETURNS: the number of gop in FULL_GOP_BUFFER of es
 static inline int count_gop_of_encoding_task(EncodeStruct *es) {
-	List *gop_list = FULL_GOP_BUFFER[es->full_gop_buffer_id];
-	return length_List(gop_list);
+	queue *gop_queue = FULL_GOP_BUFFER[es->full_gop_buffer_id];
+	return length_of_queue(gop_queue);
 }
 
 // RETURNS: the EncodeStruct of the slowest encoding task
@@ -1543,7 +1538,7 @@ static inline bool has_least_unencoded_gop(EncodeStruct *es) {
 
 // RETURNS: the first Gop of encoding task es(but doesn't remove it from FULL_GOP_BUFFERS)
 inline Gop *peek_first_gop(EncodeStruct *es) {
-	return (Gop *)get_first_elem_List(FULL_GOP_BUFFER[es->full_gop_buffer_id]);
+  return (Gop *)get_first_elem(FULL_GOP_BUFFER[es->full_gop_buffer_id]);
 }
 
 // RETURNS: true iff the encoding task es was finished

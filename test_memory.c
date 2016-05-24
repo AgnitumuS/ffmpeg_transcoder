@@ -38,5 +38,7 @@ int main() {
 	char *big = (char *)malloc(big_size);
 	free(big);
 
+  fprintf(stdout, "success!\n");
+
 	return 0;
 }

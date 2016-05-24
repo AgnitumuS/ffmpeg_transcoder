@@ -1,5 +1,8 @@
 #include "patch_memory.h"
 
+void ss_expand_memory(ss_memory_t *memory);
+void ss_shrink_memory(ss_memory_t *memory);
+
 /**
  * @param memory: the memory to be initialized
  * @param unit_size: the unit size of a single block
