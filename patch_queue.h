@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <string.h>
+#include <semaphore.h>
 #include "debug.h"
 
 typedef struct queue {
@@ -13,6 +14,9 @@ typedef struct queue {
 	size_t blk_size; 						// size of each element block
 	size_t head; 								// point to the head of the queue
 	size_t tail; 								// point to the tail of the queue
+	sem_t elem_counter_mutex; 	// the mutex to count number of elements in the queue
+	sem_t enqueue_mutex; 				// the mutex to lock enqueue
+	sem_t dequeue_mutex; 				// the mutex to lock dequeue
 } queue;
 
 void initialize_queue(queue *q, size_t queue_size, size_t blk_size) {
