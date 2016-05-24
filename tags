@@ -1,0 +1,265 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+ALIVED_DEC_THREAD_CNT	transcoder.c	/^sem_t ALIVED_DEC_THREAD_CNT;$/;"	v
+ASSERT	contracts.h	16;"	d
+ASSERT	contracts.h	22;"	d
+ASSERT	contracts.h	28;"	d
+AUTOMATIC_ALLOC_THREAD	transcoder.c	37;"	d	file:
+AVERAGE_FPS	transcoder.c	/^static float AVERAGE_FPS = 0;$/;"	v	file:
+BUSY_ENCODE_THREAD_COUNT	transcoder.c	/^static int BUSY_ENCODE_THREAD_COUNT = 0;$/;"	v	file:
+CHECKING_FREQ	transcoder.c	/^int CHECKING_FREQ = 3;$/;"	v
+CHECKING_FREQ_OF_DEC_THREAD	transcoder.c	/^int CHECKING_FREQ_OF_DEC_THREAD = 3;$/;"	v
+CODEC_TIME_BASE	transcoder.c	/^AVRational CODEC_TIME_BASE;$/;"	v
+CONSOL_OUTPUT	transcoder.c	/^static int CONSOL_OUTPUT = 1;$/;"	v	file:
+COUNT_FULL_GOP_BUFFER_REF_GOP	transcoder.c	/^sem_t COUNT_FULL_GOP_BUFFER_REF_GOP;$/;"	v
+DECODED_FRAMES	transcoder.c	/^static int DECODED_FRAMES = 0;$/;"	v	file:
+DECODE_STEP	transcoder.c	/^static int DECODE_STEP = 300;$/;"	v	file:
+DEC_THREAD_CNT	transcoder.c	/^static int DEC_THREAD_CNT  = 0;$/;"	v	file:
+DEC_THREAD_TRANSFER_COND	transcoder.c	/^int DEC_THREAD_TRANSFER_COND = 10;$/;"	v
+ENC_THREAD_CNT	transcoder.c	/^static int ENC_THREAD_CNT = 0;$/;"	v	file:
+ENSURES	contracts.h	18;"	d
+ENSURES	contracts.h	24;"	d
+ENSURES	contracts.h	30;"	d
+ERR_LOG	debug.h	3;"	d
+EncodeStruct	transcoder.c	/^typedef struct EncodeStruct {$/;"	s	file:
+EncodeStruct	transcoder.c	/^}EncodeStruct;$/;"	t	typeref:struct:EncodeStruct	file:
+FASTER_IN_GOP	transcoder.c	/^int FASTER_IN_GOP = 3;$/;"	v
+FILE_LOG	debug.h	4;"	d
+FLAGS	Makefile	/^FLAGS := -O3 -Wall$/;"	m
+FPS_COUNT	transcoder.c	/^static int FPS_COUNT = 0;$/;"	v	file:
+FPS_MEASURE_DURATION	transcoder.c	/^static const int FPS_MEASURE_DURATION = 1;$/;"	v	file:
+FULL_GOP_BUFFER	transcoder.c	/^List **FULL_GOP_BUFFER = NULL;    \/\/ contains processed gops where each gop contains GOP_SIZE elems$/;"	v
+FULL_GOP_BUFFER_MUTEX	transcoder.c	/^sem_t *FULL_GOP_BUFFER_MUTEX;$/;"	v
+FULL_GOP_BUFFER_SIZE	transcoder.c	/^static int FULL_GOP_BUFFER_SIZE = 80;$/;"	v	file:
+FULL_GOP_NUM	transcoder.c	/^sem_t *FULL_GOP_NUM;$/;"	v
+GET_BLK_ADDR	patch_memory.h	10;"	d
+GOP_BUFFER	transcoder.c	/^List *GOP_BUFFER = NULL;  \/\/ contains the decoded and scaled gop frames$/;"	v
+GOP_BUFFER_MUTEX	transcoder.c	/^sem_t GOP_BUFFER_MUTEX;$/;"	v
+GOP_COUNT	transcoder.c	/^static int GOP_COUNT = 0;$/;"	v	file:
+GOP_SIZE	transcoder.c	/^static int GOP_SIZE = 100;$/;"	v	file:
+Gop	transcoder.c	/^typedef struct Gop {$/;"	s	file:
+Gop	transcoder.c	/^}Gop;$/;"	t	typeref:struct:Gop	file:
+GopPackets	transcoder.c	/^typedef struct GopPackets {$/;"	s	file:
+GopPackets	transcoder.c	/^}GopPackets;$/;"	t	typeref:struct:GopPackets	file:
+HAS_AUDIO	transcoder.c	/^static int HAS_AUDIO = 0;$/;"	v	file:
+HELP_WITH_OTHER_TASK	transcoder.c	/^sem_t HELP_WITH_OTHER_TASK;$/;"	v
+ID_OF_THE_FIRST_CORE_TO_BIND	transcoder.c	/^static int ID_OF_THE_FIRST_CORE_TO_BIND = 0;$/;"	v	file:
+JO_DEBUG_H	debug.h	2;"	d
+List	list.h	/^typedef struct List {$/;"	s
+List	list.h	/^}List;$/;"	t	typeref:struct:List
+ListNode	list.h	/^typedef struct ListNode {$/;"	s
+ListNode	list.h	/^}ListNode;$/;"	t	typeref:struct:ListNode
+NEXT	patch_memory.h	11;"	d
+NEXT_BINDING_CORE_ID	transcoder.c	/^static int NEXT_BINDING_CORE_ID = 0;$/;"	v	file:
+OUTPUT_VIDEO_NUM	transcoder.c	/^static int OUTPUT_VIDEO_NUM = 0;   $/;"	v	file:
+PACKET_BUFFER	transcoder.c	/^List * PACKET_BUFFER;$/;"	v
+PACKET_BUFFER_MUTEX	transcoder.c	/^sem_t PACKET_BUFFER_MUTEX;$/;"	v
+PATCH_DLIST_H	patch_dlist.h	2;"	d
+PATCH_MEMORY_H	patch_memory.h	2;"	d
+PATCH_QUEUE_H	patch_queue.h	2;"	d
+PERIOD_LIST	transcoder.c	/^static List *PERIOD_LIST = NULL;$/;"	v	file:
+PERIOD_LIST_MUTEX	transcoder.c	/^sem_t PERIOD_LIST_MUTEX;$/;"	v
+PRINT_DYNAMIC_FPS	transcoder.c	/^static int PRINT_DYNAMIC_FPS = 0;$/;"	v	file:
+PTS_DURATION	transcoder.c	/^static int PTS_DURATION = -1;$/;"	v	file:
+Period	transcoder.c	/^typedef struct Period{$/;"	s	file:
+Period	transcoder.c	/^}Period;$/;"	t	typeref:struct:Period	file:
+REFCOUNT	transcoder.c	/^static int REFCOUNT = 0;$/;"	v	file:
+REQUIRES	contracts.h	17;"	d
+REQUIRES	contracts.h	23;"	d
+REQUIRES	contracts.h	29;"	d
+SAMPLE_ASPECT_RATIO	transcoder.c	/^AVRational SAMPLE_ASPECT_RATIO;$/;"	v
+SRC_FILENAME	transcoder.c	/^static const char *SRC_FILENAME = NULL;$/;"	v	file:
+SRC_HEIGHT	transcoder.c	/^static int SRC_WIDTH, SRC_HEIGHT;$/;"	v	file:
+SRC_PICTURE_SIZE	transcoder.c	/^static int SRC_PICTURE_SIZE = 0;$/;"	v	file:
+SRC_PIX_FMT	transcoder.c	/^static enum AVPixelFormat SRC_PIX_FMT;$/;"	v	typeref:enum:AVPixelFormat	file:
+SRC_WIDTH	transcoder.c	/^static int SRC_WIDTH, SRC_HEIGHT;$/;"	v	file:
+START_PTS	transcoder.c	/^static int START_PTS = -1;$/;"	v	file:
+STREAM_TIME_BASE	transcoder.c	/^AVRational STREAM_TIME_BASE;$/;"	v
+TEST_DECODE_OUTPUT	transcoder.c	36;"	d	file:
+THREAD_CNT	transcoder.c	/^static int THREAD_CNT = 0;$/;"	v	file:
+THREAD_COUNT	transcoder.c	/^static int THREAD_COUNT = 0;$/;"	v	file:
+TICKS_PER_FRAME	transcoder.c	/^static int TICKS_PER_FRAME;$/;"	v	file:
+TimeRecord	transcoder.c	/^typedef struct time_record * TimeRecord;$/;"	t	typeref:struct:time_record	file:
+VIDEO_FRAME_COUNT	transcoder.c	/^static int VIDEO_FRAME_COUNT = 0;$/;"	v	file:
+VIDEO_FRAME_COUNT_MUTEX	transcoder.c	/^sem_t VIDEO_FRAME_COUNT_MUTEX;$/;"	v
+_GNU_SOURCE	transcoder.c	1;"	d	file:
+_LIST_H	list.h	2;"	d
+add_gop_to_full_gop_buffer	transcoder.c	/^static void inline add_gop_to_full_gop_buffer(Gop *g, int full_gop_buffer_id) {$/;"	f	file:
+add_gop_to_full_gop_buffers	transcoder.c	/^void add_gop_to_full_gop_buffers(Gop *g) {$/;"	f
+add_gop_to_gop_buffer	transcoder.c	/^void add_gop_to_gop_buffer(Gop *g) {$/;"	f
+add_packets_to_packet_buffer	transcoder.c	/^void add_packets_to_packet_buffer(GopPackets *packets) {$/;"	f
+add_remaining_frame_to_full_gop_buffer	transcoder.c	/^int add_remaining_frame_to_full_gop_buffer() {$/;"	f
+add_scaled_frame_to_gop_buffer	transcoder.c	/^void add_scaled_frame_to_gop_buffer(int pict_num, uint8_t **buf) {$/;"	f
+all_encoding_tasks_finished	transcoder.c	/^inline bool all_encoding_tasks_finished() {$/;"	f
+allocate_threads	transcoder.c	/^void allocate_threads() {$/;"	f
+append_List	list.c	/^List *append_List(List *l1, List *l2) {$/;"	f
+append_List	patch_dlist.c	/^List *append_List(List *l1, List *l2) {$/;"	f
+big_size	test_memory.c	/^int big_size = 311040000;$/;"	v
+binding_core	transcoder.c	/^void binding_core() {$/;"	f
+bitrate	transcoder.c	/^	int bitrate;$/;"	m	struct:EncodeStruct	file:
+blk_size	patch_memory.h	/^  size_t blk_size;          \/\/ the size of each memory block$/;"	m	struct:ss_memory
+blk_size	patch_queue.h	/^	size_t blk_size; 						\/\/ size of each element block$/;"	m	struct:queue
+buf	transcoder.c	/^	uint8_t *buf;$/;"	m	struct:Gop	file:
+capacity	transcoder.c	/^	int capacity;$/;"	m	struct:Gop	file:
+clone_string	transcoder.c	/^char* clone_string(char* s) {$/;"	f
+cmp_GopPackets	transcoder.c	/^int cmp_GopPackets(ListNode *n1, ListNode *n2) {$/;"	f
+core_binding_initialize	transcoder.c	/^void core_binding_initialize() {$/;"	f
+count	transcoder.c	/^	int count;$/;"	m	struct:GopPackets	file:
+count_gop_in_full_gop_buffer	transcoder.c	/^int count_gop_in_full_gop_buffer() {$/;"	f
+count_gop_of_encoding_task	transcoder.c	/^static inline int count_gop_of_encoding_task(EncodeStruct *es) {$/;"	f	file:
+data	patch_memory.h	/^  char *data;             	\/\/ the memory where actual data is stored$/;"	m	struct:ss_memory
+data	patch_queue.h	/^	char *data; 							\/\/ array to store the actual data$/;"	m	struct:queue
+decode	transcoder.c	/^int decode() {$/;"	f
+decode_flush	transcoder.c	/^void decode_flush(AVPacket* p_pkt, int video_stream_idx, AVCodecContext* video_dec_ctx, AVFrame* frame, uint8_t** video_dst_data, int* video_dst_linesize, Period* p){$/;"	f
+decode_period	transcoder.c	/^int decode_period() {$/;"	f
+decode_time_cost	transcoder.c	/^TimeRecord decode_time_cost;$/;"	v
+decoding_thread_help_with_encoding_task	transcoder.c	/^void decoding_thread_help_with_encoding_task() {$/;"	f
+dlist	patch_dlist.h	/^typedef struct dlist {$/;"	s
+dlist_node	patch_dlist.h	/^typedef struct dlist_node {$/;"	s
+dlist_node_t	patch_dlist.h	/^} dlist_node_t;$/;"	t	typeref:struct:dlist_node
+dlist_t	patch_dlist.h	/^} dlist_t;$/;"	t	typeref:struct:dlist
+dst_height	transcoder.c	/^	int dst_height;$/;"	m	struct:EncodeStruct	file:
+dst_pix_fmt	transcoder.c	/^	enum AVPixelFormat dst_pix_fmt;$/;"	m	struct:EncodeStruct	typeref:enum:EncodeStruct::AVPixelFormat	file:
+dst_width	transcoder.c	/^	int dst_width;$/;"	m	struct:EncodeStruct	file:
+elem	list.h	/^	void *elem;$/;"	m	struct:ListNode
+elem	patch_dlist.h	/^	void *elem;$/;"	m	struct:dlist_node
+encode_and_scale_thread	transcoder.c	/^int encode_and_scale_thread(void *arg) {$/;"	f
+encode_and_scale_thread0	transcoder.c	/^int encode_and_scale_thread0 (void *arg) {$/;"	f
+encode_thread_mutex	transcoder.c	/^sem_t encode_thread_mutex;$/;"	v
+encode_time_cost	transcoder.c	/^TimeRecord encode_time_cost;$/;"	v
+encoded_cnt	transcoder.c	/^	int encoded_cnt; \/\/ how many times frames in this gop have been encoded$/;"	m	struct:Gop	file:
+encoded_frame_cnt	transcoder.c	/^	int encoded_frame_cnt;$/;"	m	struct:EncodeStruct	file:
+end	list.h	/^	ListNode *end;$/;"	m	struct:List
+end	transcoder.c	/^	long end;$/;"	m	struct:Period	file:
+end	transcoder.c	/^	struct timeval end;$/;"	m	struct:time_record	typeref:struct:time_record::timeval	file:
+enqueue	patch_queue.h	/^void enqueue(queue *q, void *elem) {$/;"	f
+ess	transcoder.c	/^static EncodeStruct ess[6] =$/;"	v	file:
+finalize_queue	patch_queue.h	/^void finalize_queue() {$/;"	f
+finalize_ss_memory	patch_memory.c	/^void finalize_ss_memory(ss_memory_t *memory) {$/;"	f
+find_gop_in_gop_buffer	transcoder.c	/^Gop *find_gop_in_gop_buffer(int gop_id) {$/;"	f
+flush_encoder	transcoder.c	/^int flush_encoder(AVFormatContext *fmt_ctx,unsigned int stream_index){$/;"	f
+frame_cnt	transcoder.c	/^	int frame_cnt;   \/\/ the number of frames that actually exists$/;"	m	struct:Gop	file:
+free_Gop	transcoder.c	/^void free_Gop(Gop *g) {$/;"	f
+free_list	patch_memory.h	/^  char *free_list;        	\/\/ pointer to the head of free list$/;"	m	struct:ss_memory
+free_time_records	transcoder.c	/^void free_time_records() {$/;"	f
+full_gop_buffer_id	transcoder.c	/^	int full_gop_buffer_id;$/;"	m	struct:EncodeStruct	file:
+function_name	transcoder.c	/^	char* function_name;$/;"	m	struct:time_record	file:
+get_core_id	transcoder.c	/^int get_core_id() {$/;"	f
+get_core_id_mutex	transcoder.c	/^sem_t get_core_id_mutex;$/;"	v
+get_filename	transcoder.c	/^void get_filename(char *dir, int id, char*buf) {$/;"	f
+get_first_elem_List	list.c	/^void *get_first_elem_List(List *l) {$/;"	f
+get_first_elem_List	patch_dlist.c	/^void *get_first_elem_List(List *l) {$/;"	f
+get_frame_type	transcoder.c	/^static inline char* get_frame_type(AVFrame *frame) {$/;"	f	file:
+get_head	patch_queue.h	/^void *get_head(queue *q) {$/;"	f
+get_period	transcoder.c	/^Period* get_period(){$/;"	f
+get_tail	patch_queue.h	/^void *get_tail(queue *q) {$/;"	f
+gop_buffer_memory	transcoder.c	/^ss_memory_t gop_buffer_memory;$/;"	v
+gop_id	transcoder.c	/^	int gop_id;$/;"	m	struct:Gop	file:
+gop_id	transcoder.c	/^	int gop_id;$/;"	m	struct:GopPackets	file:
+gop_mutex	transcoder.c	/^	sem_t gop_mutex;$/;"	m	struct:Gop	file:
+gop_size	test_memory.c	/^int gop_size = 327680000;$/;"	v
+gop_structure_memory	transcoder.c	/^ss_memory_t gop_structure_memory;$/;"	v
+has_least_unencoded_gop	transcoder.c	/^static inline bool has_least_unencoded_gop(EncodeStruct *es) {$/;"	f	file:
+has_period	transcoder.c	/^int has_period(){$/;"	f
+head	patch_queue.h	/^	size_t head; 								\/\/ point to the head of the queue$/;"	m	struct:queue
+initialize_decode_data	transcoder.c	/^int initialize_decode_data() {$/;"	f
+initialize_encode_data	transcoder.c	/^int initialize_encode_data() {$/;"	f
+initialize_queue	patch_queue.h	/^void initialize_queue(queue *q, size_t queue_size, size_t blk_size) {$/;"	f
+initialize_ss_memory	patch_memory.c	/^void initialize_ss_memory(ss_memory_t *memory, size_t unit_size, size_t memory_size, char *memory_name) {$/;"	f
+initialize_time_records	transcoder.c	/^void initialize_time_records() {$/;"	f
+insert_List	list.c	/^List *insert_List(ListNode *node, List *l) {$/;"	f
+insert_List	patch_dlist.c	/^List *insert_List(ListNode *node, List *l) {$/;"	f
+insert_by_order_List	list.c	/^List *insert_by_order_List(ListNode *node, List *l,$/;"	f
+insert_by_order_List	patch_dlist.c	/^List *insert_by_order_List(ListNode *node, List *l,$/;"	f
+is_contain_List	list.c	/^bool is_contain_List(void *elem, List *l) {$/;"	f
+is_contain_List	patch_dlist.c	/^bool is_contain_List(void *elem, dlist_t *l) {$/;"	f
+is_empty_Gop	transcoder.c	/^bool is_empty_Gop(Gop *g) {$/;"	f
+is_empty_GopPackets	transcoder.c	/^bool is_empty_GopPackets(GopPackets *gp) {$/;"	f
+is_empty_List	list.c	/^bool is_empty_List(List *l) {$/;"	f
+is_empty_List	patch_dlist.c	/^bool is_empty_List(dlist_t *l) {$/;"	f
+is_empty_queue	patch_queue.h	/^bool is_empty_queue(queue *q) {$/;"	f
+is_encoding_task_finished	transcoder.c	/^inline bool is_encoding_task_finished(EncodeStruct *es) {$/;"	f
+is_fast_enough	transcoder.c	/^static inline bool is_fast_enough(EncodeStruct *es) {$/;"	f	file:
+is_full_queue	patch_queue.h	/^bool is_full_queue(queue *q) {$/;"	f
+is_i_frame	transcoder.c	/^static inline bool is_i_frame(AVFrame *frame) {$/;"	f	file:
+is_key_frame	transcoder.c	/^static inline bool is_key_frame(AVFrame *frame) {$/;"	f	file:
+length_List	list.c	/^int length_List(List *l) {$/;"	f
+length_List	patch_dlist.c	/^int length_List(List *l) {$/;"	f
+main	test_memory.c	/^int main() {$/;"	f
+main	transcoder.c	/^int main (int argc, char **argv)$/;"	f
+memory_size	patch_memory.h	/^  size_t memory_size;       \/\/ the total number of memory blocks in this memory$/;"	m	struct:ss_memory
+name	patch_memory.h	/^  char *name;             	\/\/ the name of the memory, no more than 30 alphabet$/;"	m	struct:ss_memory
+new_Gop	transcoder.c	/^Gop *new_Gop(int gop_id, int gop_size) {$/;"	f
+new_GopPackets	transcoder.c	/^GopPackets *new_GopPackets(int count, int gop_id) {$/;"	f
+new_List	list.c	/^List *new_List() {$/;"	f
+new_List	patch_dlist.c	/^dlist_t *new_List() {$/;"	f
+new_ListNode	list.c	/^ListNode * new_ListNode(void *elem) {$/;"	f
+new_ListNode	patch_dlist.c	/^dlist_node_t *new_ListNode(void *elem) {$/;"	f
+new_empty_ListNode	list.c	/^ListNode * new_empty_ListNode() {$/;"	f
+new_empty_ListNode	patch_dlist.c	/^dlist_node_t *new_empty_ListNode() {$/;"	f
+next	list.h	/^	struct ListNode *next;$/;"	m	struct:ListNode	typeref:struct:ListNode::ListNode
+next	patch_dlist.h	/^	struct dlist_node *next;$/;"	m	struct:dlist_node	typeref:struct:dlist_node::dlist_node
+num_cores	transcoder.c	/^static int num_cores;$/;"	v	file:
+open_codec_context	transcoder.c	/^static int open_codec_context(int *stream_idx,$/;"	f	file:
+output_dir	transcoder.c	/^	char output_dir[256];$/;"	m	struct:EncodeStruct	file:
+output_filename	transcoder.c	/^	char *output_filename;$/;"	m	struct:EncodeStruct	file:
+output_one_video	transcoder.c	/^void output_one_video(EncodeStruct *es) {$/;"	f
+output_packets_time_cost	transcoder.c	/^TimeRecord output_packets_time_cost;$/;"	v
+packets	transcoder.c	/^	AVPacket **packets;$/;"	m	struct:GopPackets	file:
+peek_first_gop	transcoder.c	/^inline Gop *peek_first_gop(EncodeStruct *es) {$/;"	f
+prev	patch_dlist.h	/^	struct dlist_node *prev;$/;"	m	struct:dlist_node	typeref:struct:dlist_node::dlist_node
+print_average_fps	transcoder.c	/^void print_average_fps(){$/;"	f
+print_gop_id_of_full_gop_buffer	transcoder.c	/^void print_gop_id_of_full_gop_buffer() {$/;"	f
+print_time_records	transcoder.c	/^void print_time_records() {$/;"	f
+produce_one_video_segment_list_file	transcoder.c	/^void produce_one_video_segment_list_file(EncodeStruct *es) {$/;"	f
+queue	patch_queue.h	/^typedef struct queue {$/;"	s
+queue	patch_queue.h	/^} queue;$/;"	t	typeref:struct:queue
+queue_size	patch_queue.h	/^	size_t queue_size; 				\/\/ maximum number of blocks in the queue$/;"	m	struct:queue
+remove_List	list.c	/^ListNode *remove_List(List *l) {$/;"	f
+remove_List	patch_dlist.c	/^ListNode *remove_List(List *l) {$/;"	f
+remove_elem_List	list.c	/^void remove_elem_List(List *l, void *elem) {$/;"	f
+remove_elem_List	patch_dlist.c	/^void remove_elem_List(List *l, void *elem) {$/;"	f
+remove_gop_from_full_gop_buffer	transcoder.c	/^Gop *remove_gop_from_full_gop_buffer(int full_gop_buffer_id) {$/;"	f
+remove_gop_from_gop_buffer	transcoder.c	/^void remove_gop_from_gop_buffer(Gop *g) {$/;"	f
+remove_packets_from_packet_buffer	transcoder.c	/^GopPackets *remove_packets_from_packet_buffer() {$/;"	f
+running_encode_thread	transcoder.c	/^int running_encode_thread = 0;$/;"	v
+running_thread	transcoder.c	/^	int running_thread;$/;"	m	struct:EncodeStruct	file:
+running_thread_mutex	transcoder.c	/^	sem_t running_thread_mutex;$/;"	m	struct:EncodeStruct	file:
+scale_and_encode_gop	transcoder.c	/^int scale_and_encode_gop(Gop *g, EncodeStruct *es) {$/;"	f
+scale_time_cost	transcoder.c	/^TimeRecord scale_time_cost;$/;"	v
+should_decoding_thread_help_with_encoding_task	transcoder.c	/^bool should_decoding_thread_help_with_encoding_task() {$/;"	f
+should_help_with_other_encoding_tasks	transcoder.c	/^static inline bool should_help_with_other_encoding_tasks(int encoded_gop, EncodeStruct *es) {$/;"	f	file:
+slowest_encoding_task	transcoder.c	/^static inline EncodeStruct *slowest_encoding_task() {$/;"	f	file:
+ss_expand_memory	patch_memory.c	/^void ss_expand_memory(ss_memory_t *memory) {$/;"	f
+ss_free	patch_memory.c	/^void ss_free(ss_memory_t *memory, void *p) {$/;"	f
+ss_malloc	patch_memory.c	/^void *ss_malloc(ss_memory_t *memory, size_t size) {$/;"	f
+ss_memory	patch_memory.h	/^typedef struct ss_memory {$/;"	s
+ss_memory_t	patch_memory.h	/^} ss_memory_t;$/;"	t	typeref:struct:ss_memory
+ss_shrink_memory	patch_memory.c	/^void ss_shrink_memory(ss_memory_t *memory) {$/;"	f
+ss_unlink	patch_memory.c	/^void ss_unlink(char *p_node) {$/;"	f
+start	list.h	/^	ListNode *start;$/;"	m	struct:List
+start	patch_dlist.h	/^	dlist_node_t *start;$/;"	m	struct:dlist
+start	transcoder.c	/^	long start;$/;"	m	struct:Period	file:
+start	transcoder.c	/^	struct timeval start;$/;"	m	struct:time_record	typeref:struct:time_record::timeval	file:
+tail	patch_queue.h	/^	int tail; 								\/\/ point to the tail of the queue$/;"	m	struct:queue
+thread_num	transcoder.c	/^	int thread_num;$/;"	m	struct:EncodeStruct	file:
+time_cost	transcoder.c	/^	unsigned long time_cost; \/\/ time cost of a function in us$/;"	m	struct:time_record	file:
+time_record	transcoder.c	/^struct time_record {$/;"	s	file:
+time_record_free	transcoder.c	/^void time_record_free(TimeRecord T) {$/;"	f
+time_record_interval_add	transcoder.c	/^void time_record_interval_add(TimeRecord T) {$/;"	f
+time_record_interval_end	transcoder.c	/^void time_record_interval_end(TimeRecord T) {$/;"	f
+time_record_interval_start	transcoder.c	/^void time_record_interval_start(TimeRecord T) {$/;"	f
+time_record_new	transcoder.c	/^TimeRecord time_record_new(char* function_name) {$/;"	f
+time_record_print	transcoder.c	/^void time_record_print(TimeRecord T) {$/;"	f
+timeval_difference	transcoder.c	/^inline static unsigned long timeval_difference(struct timeval start, struct timeval end) {$/;"	f	file:
+transfer_to_task	transcoder.c	/^void transfer_to_task(EncodeStruct **src_es_p, int *full_gop_buffer_id_p, EncodeStruct *dst_es){$/;"	f
+unit_size	patch_memory.h	/^  size_t unit_size;         \/\/ the unit size of each type, does not equal memory block size$/;"	m	struct:ss_memory
+valid	transcoder.c	/^	uint8_t *valid;$/;"	m	struct:Gop	file:
+xcalloc	list.c	/^void *xcalloc(size_t nobj, size_t size) {$/;"	f
+xcalloc	patch_dlist.c	/^void *xcalloc(size_t nobj, size_t size) {$/;"	f
+xmalloc	list.c	/^void * xmalloc(size_t size) {$/;"	f
+xmalloc	patch_dlist.c	/^void * xmalloc(size_t size) {$/;"	f

@@ -1,4 +1,4 @@
-FLAGS := -O3 -Wall 
+FLAGS := -O3 -Wall
 
 .PHONY : clean
 
@@ -17,5 +17,11 @@ list.o: list.c
 patch_memory.o: patch_memory.c patch_memory.h
 	gcc $(FLAGS) -c -o patch_memory.o patch_memory.c
 
+test_memory: test_memory.c patch_memory.o
+	gcc $(FLAGS) -o test_memory patch_memory.o test_memory.c
+
+test_queue: test_queue.c patch_queue.h
+	gcc $(FLAGS) -o test_queue test_queue.c
+
 clean:
-	rm -f *.o transcoder
+	rm -f *.o transcoder *.mp4*

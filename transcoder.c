@@ -36,7 +36,7 @@
 #define TEST_DECODE_OUTPUT
 #define AUTOMATIC_ALLOC_THREAD
 //#define DEC_THREAD_SCHEDULING
-#define ENC_THREAD_SCHEDULING
+//#define ENC_THREAD_SCHEDULING
 
 
 typedef struct EncodeStruct {
@@ -417,11 +417,12 @@ ss_memory_t gop_structure_memory;
 ss_memory_t gop_buffer_memory;
 
 Gop *new_Gop(int gop_id, int gop_size) {
-	Gop *g = xmalloc(sizeof(Gop));
+//	fprintf(stdout, "new Gop is evoked, gop structure size: %lu gop size: %d\n", sizeof(Gop), SRC_PICTURE_SIZE * gop_size);
+	Gop *g = (Gop *)ss_malloc(&gop_structure_memory, sizeof(Gop));
 	g->gop_id = gop_id;
 	g->frame_cnt = 0;
 	g->capacity = gop_size;
-	g->buf = xmalloc(SRC_PICTURE_SIZE * gop_size);
+	g->buf = (uint8_t *)ss_malloc(&gop_buffer_memory, SRC_PICTURE_SIZE * gop_size);
 	g->valid = xcalloc(gop_size, sizeof(uint8_t));
 	g->encoded_cnt = 0;
 	sem_init(&(g->gop_mutex), 0, 1);
@@ -431,11 +432,12 @@ Gop *new_Gop(int gop_id, int gop_size) {
 // EFFECT: free the given Gop struct and its buffer iff its frames have been
 // encoded OUTPUT_VIDEO_NUM times
 void free_Gop(Gop *g) {
+//	fprintf(stdout, "free Gop is evoked\n");
 	sem_wait(&g->gop_mutex);
 	g->encoded_cnt++;
 	if (g->encoded_cnt == OUTPUT_VIDEO_NUM) {
-		free(g->buf);
-		free(g);
+		ss_free(&gop_buffer_memory, g->buf);
+		ss_free(&gop_structure_memory, g);
 		sem_post(&COUNT_FULL_GOP_BUFFER_REF_GOP);
 	}
 	sem_post(&g->gop_mutex);
@@ -598,6 +600,7 @@ void add_gop_to_full_gop_buffers(Gop *g) {
 
 // EFFECT: remove the first gop from FULL_GOP_BUFFER
 Gop *remove_gop_from_full_gop_buffer(int full_gop_buffer_id) {
+  // count GOP_BUFFER
 	sem_wait(&FULL_GOP_NUM[full_gop_buffer_id]);
 	sem_wait(&FULL_GOP_BUFFER_MUTEX[full_gop_buffer_id]);
 	ListNode * node = remove_List(FULL_GOP_BUFFER[full_gop_buffer_id]);
@@ -618,12 +621,18 @@ void add_scaled_frame_to_gop_buffer(int pict_num, uint8_t **buf) {
 	Gop *g = find_gop_in_gop_buffer(gop_id);
 	if (g == NULL) {
 		g = new_Gop(gop_id, GOP_SIZE);
+		// FIXME: debug
+//		fprintf(stdout, "evoke new_Gop from add_scaled_frame_to_gop_buffer\n");
 		add_gop_to_gop_buffer(g);
 	}
 	sem_post(&GOP_BUFFER_MUTEX);
 
 	sem_wait(&g->gop_mutex);
+//	fprintf(stdout, "g->buf: %p, g->buf index: %p, buf: %p gop_buffer_memory start: %p end: %p\n", 
+//			g->buf, &g->buf[SRC_PICTURE_SIZE * frame_id], buf, gop_buffer_memory.data, &gop_buffer_memory.data[gop_buffer_memory.blk_size * gop_buffer_memory.memory_size]);
 	memcpy(&g->buf[SRC_PICTURE_SIZE * frame_id], buf[0], SRC_PICTURE_SIZE);
+	// FIXME: debug
+//	fprintf(stdout, "g->buf index: %p, buf: %p, finish memcpy debug\n", &g->buf[SRC_PICTURE_SIZE * frame_id], buf);
 	g->frame_cnt += 1;
 	g->valid[frame_id] = 1;
 	if (g->frame_cnt == GOP_SIZE) {
@@ -840,6 +849,8 @@ void decode_flush(AVPacket* p_pkt, int video_stream_idx, AVCodecContext* video_d
 						++DECODED_FRAMES;
 						sem_post(&VIDEO_FRAME_COUNT_MUTEX);
 
+						// FIXME: debug
+//						fprintf(stdout, "evoke add_scaled_frame_to_gop_buffer from decode_flush\n");
 						add_scaled_frame_to_gop_buffer(frame_index, video_dst_data);
 					}
 
@@ -979,6 +990,8 @@ int decode_period() {
 							++DECODED_FRAMES;
 							sem_post(&VIDEO_FRAME_COUNT_MUTEX);
 
+							// FIXME: debug
+//							fprintf(stdout, "evoke add_scaled_frame_to_gop_buffer from decode_period\n");
 							add_scaled_frame_to_gop_buffer(frame_index, video_dst_data);
 
 #ifdef DEC_THREAD_SCHEDULING
@@ -1125,6 +1138,8 @@ int decode() {
 							(const uint8_t **) (frame->data), frame->linesize,
 							SRC_PIX_FMT, SRC_WIDTH, SRC_HEIGHT);
 
+					// FIXME: debug
+//					fprintf(stdout, "evok add_scaled_frame_to_gop_buffer from decode\n");
 					add_scaled_frame_to_gop_buffer(frame_index, video_dst_data);
 
 #ifdef DEC_THREAD_SCHEDULING
@@ -1888,8 +1903,8 @@ int main (int argc, char **argv)
 	core_binding_initialize();
 
 #ifdef PATCH_MEMORY_H
-	initialize_ss_memory(&gop_structure_memory, sizeof(Gop), 2, "gop_structure");
-	initialize_ss_memory(&gop_buffer_memory, GOP_SIZE, 2, "gop_buffer");
+	initialize_ss_memory(&gop_structure_memory, sizeof(Gop), 50, "gop_structure");
+	initialize_ss_memory(&gop_buffer_memory, SRC_PICTURE_SIZE * GOP_SIZE, 50, "gop_buffer");
 #endif
 
 #ifdef RECORD_TIME_COST
@@ -1944,7 +1959,12 @@ int main (int argc, char **argv)
 		system(command);
 	}
 
-	printf("Average FPS is: %.2f \n", AVERAGE_FPS / FPS_COUNT);
+	// TODO: change
+//	printf("Average FPS is: %.2f \n", AVERAGE_FPS / FPS_COUNT);
+	FILE *fps_output;
+	fps_output = fopen("fps_output", "a");
+	fprintf(fps_output, "ss_memory: Average FPS is: %.2f \n", AVERAGE_FPS / FPS_COUNT);
+	fclose(fps_output);
 
 #ifdef PATCH_MEMORY_H
 	finalize_ss_memory(&gop_structure_memory);
