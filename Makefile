@@ -17,11 +17,15 @@ list.o: list.c
 patch_memory.o: patch_memory.c patch_memory.h
 	gcc $(FLAGS) -c -o patch_memory.o patch_memory.c
 
+patch_queue.o: patch_queue.c patch_queue.h
+	gcc $(FLAGS) -c -o patch_queue.o patch_queue.c
+
 test_memory: test_memory.c patch_memory.o
 	gcc $(FLAGS) -o test_memory patch_memory.o test_memory.c
 
-test_queue: test_queue.c patch_queue.h
-	gcc $(FLAGS) -o test_queue test_queue.c
+test_queue: test_queue.c patch_queue.o
+	gcc $(FLAGS) -o test_queue test_queue.c patch_queue.o \
+		-lpthread
 
 clean:
 	rm -f *.o transcoder *.mp4*
